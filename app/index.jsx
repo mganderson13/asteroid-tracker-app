@@ -1,15 +1,30 @@
 import React, { useState } from "react";
-import { Text, View, ActivityIndicator, FlatList } from "react-native";
+import { Text, View, ActivityIndicator, FlatList, Button, StyleSheet } from "react-native";
+import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
+import DateTimePicker from '@react-native-community/datetimepicker';
 import AsteroidDisplay from "./components/AsteroidListCard";
 import useNasaApi from "./api/nasaApi";
 
 export default function Index() {
   let currentDate = new Date().toJSON().slice(0, 10);
-  console.log("current Date:", currentDate);
   const [selectedDate, setSelectedDate] = useState(currentDate);
+  const [date, setDate] = useState(new Date())
+  const [showDatePicker, setShowDatePicker] = useState(false);
 
   const { data, isLoading } = useNasaApi(selectedDate);
-  console.log("data from imported function:", data);
+
+  const toggleDatePicker = () => {
+    setShowDatePicker(!showDatePicker);
+  };
+  const onChange = ({ type }, pickedDate) => {
+    if (type == "set") {
+      const currentDate = pickedDate;
+      setSelectedDate(currentDate);
+      setDate(currentDate)
+    }else {
+      toggleDatePicker();
+    }
+  };
 
   const renderItem = ({item}) => {
     return (
@@ -17,7 +32,17 @@ export default function Index() {
     )
   }
 
+  const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      justifyContent: 'center',
+      marginHorizontal: 16,
+    },
+  });
+
   return (
+    <SafeAreaProvider>
+    <SafeAreaView style={styles.container}>
     <View
       style={{
         flex: 1,
@@ -26,6 +51,19 @@ export default function Index() {
       }}
     >
       <Text>Marianne's Asteroid App</Text>
+      <Button
+          title="Pick a date"
+          onPress={toggleDatePicker}
+          style={{ margin: 10 }}
+        />
+      {showDatePicker && (
+      <DateTimePicker 
+        mode="date"
+        display="spinner"
+        value={date}
+        onChange={onChange}
+      />
+      )}
       {isLoading ? (
       <ActivityIndicator />
     ) : (
@@ -36,5 +74,7 @@ export default function Index() {
       />
     )}
     </View>
+    </SafeAreaView>
+    </SafeAreaProvider>
   );
 }

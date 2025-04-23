@@ -4,7 +4,7 @@ export default function useNasaApi(dateToFetch) {
     const [isLoading, setIsLoading] = useState(true);
     const [data, setData] = useState([]);
 
-    const keyName = "lTHPxbpwqnn3thI5aiCieLtOpT1MZ85pxbkRI9tN" //process.env.NASA_API_KEY;
+    const keyName ="lTHPxbpwqnn3thI5aiCieLtOpT1MZ85pxbkRI9tN";
 
     const getAsteroidData = async () => {
         try {
@@ -13,7 +13,6 @@ export default function useNasaApi(dateToFetch) {
         );
         const json = await response.json();
         setData(json.near_earth_objects[dateToFetch]);
-        console.log("data from hook:", data);
         } catch (error) {
         console.error(error);
         }finally {
