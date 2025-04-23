@@ -10,7 +10,7 @@ export default function Index() {
         alignItems: "center",
       }}
     >
-      <Text>Marianne's Asteroid App</Text>
+      <Text>Marianne's Asteroid App!</Text>
     </View>
   );
 }
