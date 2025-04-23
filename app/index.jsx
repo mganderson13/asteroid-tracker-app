@@ -8,7 +8,7 @@ import useNasaApi from "./api/nasaApi";
 export default function Index() {
   let currentDate = new Date().toJSON().slice(0, 10);
   const [selectedDate, setSelectedDate] = useState(currentDate);
-  const [date, setDate] = useState(new Date())
+  const [tempDate, setTempDate] = useState(new Date())
   const [showDatePicker, setShowDatePicker] = useState(false);
 
   const { data, isLoading } = useNasaApi(selectedDate);
@@ -18,18 +18,19 @@ export default function Index() {
   };
   const onChange = ({ type }, pickedDate) => {
     if (type == "set") {
-      const currentDate = pickedDate;
-      setSelectedDate(currentDate);
-      setDate(currentDate)
-    }else {
-      toggleDatePicker();
+      setTempDate(pickedDate);
     }
   };
 
+  const selectDate = () => {
+    setSelectedDate(tempDate.toJSON().slice(0, 10));
+    toggleDatePicker();
+  }
+
   const renderItem = ({item}) => {
-    return (
-      <AsteroidDisplay item={item}/>
-    )
+      return (
+        <AsteroidDisplay item={item}/>
+      )
   }
 
   const styles = StyleSheet.create({
@@ -57,12 +58,19 @@ export default function Index() {
           style={{ margin: 10 }}
         />
       {showDatePicker && (
+        <View>
       <DateTimePicker 
         mode="date"
         display="spinner"
-        value={date}
+        value={tempDate}
         onChange={onChange}
       />
+      <Button 
+        title="See Asteroids"
+        onPress={selectDate}
+        style={{ margin: 10 }}
+      />
+      </View>
       )}
       {isLoading ? (
       <ActivityIndicator />
@@ -71,6 +79,7 @@ export default function Index() {
         data={data}
         renderItem={renderItem}
         keyExtractor={item=> item.id}
+        ListEmptyComponent={<Text>No data for that day</Text>}
       />
     )}
     </View>
