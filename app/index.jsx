@@ -4,6 +4,7 @@ import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import AsteroidDisplay from "./components/AsteroidListCard";
 import NoDataDisplay from "./components/NoDataDisplay";
+import AsteroidDetails from "./components/AsteroidDetails";
 import useNasaApi from "./hooks/nasaApi";
 
 export default function Index() {
@@ -11,6 +12,7 @@ export default function Index() {
   const [selectedDate, setSelectedDate] = useState(currentDate);
   const [tempDate, setTempDate] = useState(new Date())
   const [showDatePicker, setShowDatePicker] = useState(false);
+  const [showAsteroidDetails, setShowAsteroidDetails] = useState(false);
 
   const { data, isLoading, count } = useNasaApi(selectedDate);
 
@@ -32,6 +34,10 @@ export default function Index() {
       return (
         <AsteroidDisplay item={item}/>
       )
+  }
+
+  const showDetails = () => {
+    setShowAsteroidDetails(!showAsteroidDetails);
   }
 
   return (
@@ -66,6 +72,13 @@ export default function Index() {
     ) : (
       <>
       <Text style={styles.headerText}>{count} Nearby Asteroids on {selectedDate}:</Text>
+      <TouchableOpacity onPress={showDetails}>
+      <Text style={styles.buttonText}>Click here to see a summary of this day's asteroids</Text>
+      </TouchableOpacity>
+
+      {showAsteroidDetails && (
+        <AsteroidDetails selectedDate={selectedDate} data={data} />
+      )}
       <FlatList 
         data={data}
         renderItem={renderItem}
