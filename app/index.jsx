@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Text, View, ActivityIndicator, FlatList, Button, StyleSheet } from "react-native";
+import { Text, View, ActivityIndicator, FlatList, TouchableOpacity, StyleSheet } from "react-native";
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import AsteroidDisplay from "./components/AsteroidListCard";
@@ -33,57 +33,98 @@ export default function Index() {
       )
   }
 
-  const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      justifyContent: 'center',
-      marginHorizontal: 16,
-    },
-  });
-
   return (
-    <SafeAreaProvider>
+    <SafeAreaProvider style={styles.safeAreaContainer}>
     <SafeAreaView style={styles.container}>
-    <View
-      style={{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <Text>Marianne's Asteroid App</Text>
-      <Button
-          title="Pick a date"
-          onPress={toggleDatePicker}
-          style={{ margin: 10 }}
-        />
+    <View style={styles.container}>
+      <Text style={styles.titleText}>Near Earth Object Tracker aka "The Asteroid App"</Text>
+      {/* <Text style={styles.titleText}>AKA The Asteroid App</Text> */}
+      <TouchableOpacity onPress={toggleDatePicker} style={styles.button}>
+      <Text style={styles.buttonText}>Pick a date</Text>
+      </TouchableOpacity> 
+      
       {showDatePicker && (
-        <View>
+        <>
+      <View style={styles.datePickerContainer}>
       <DateTimePicker 
         mode="date"
         display="spinner"
         value={tempDate}
         onChange={onChange}
-      />
-      <Button 
-        title="See Asteroids"
-        onPress={selectDate}
-        style={{ margin: 10 }}
+        style={styles.datePicker}
       />
       </View>
+      <TouchableOpacity onPress={selectDate} style={styles.button}>
+      <Text style={styles.buttonText}>See Asteroids</Text>
+      </TouchableOpacity>
+      </>
       )}
+
       {isLoading ? (
       <ActivityIndicator />
     ) : (
+      <>
+      <Text style={styles.headerText}>Nearby asteroids on {selectedDate}:</Text>
       <FlatList 
         data={data}
         renderItem={renderItem}
         keyExtractor={item=> item.id}
         ListEmptyComponent={<Text>No data for that day</Text>}
+        style={styles.flatList}
       />
+      </>
     )}
     </View>
     </SafeAreaView>
     </SafeAreaProvider>
   );
 }
+
+const styles = StyleSheet.create({
+  safeAreaContainer: {
+    flex: 1,
+    backgroundColor: 'white',
+  },
+  container: {
+    flex: 1,
+    alignItems: "center",
+    backgroundColor: 'white',
+  },
+  titleText: {
+    fontSize: 30,
+    margin: 5,
+    textAlign: "center",
+  },
+  button: {
+    backgroundColor: 'rgb(217,224,232)',
+    color: 'rgb(3,4,5)',
+    padding: 10,
+    borderRadius: 50,
+    margin: 10,
+    maxWidth: '50%'
+  },
+  buttonText: {
+    color: 'black',
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+  datePickerContainer: {
+    backgroundColor: 'rgb(86,135,159)',
+    borderRadius: 50,
+    marginTop: 10,
+    padding: 10,
+    alignItems: 'center',
+  },
+  datePicker: {
+    textColor: 'black',
+  },
+  headerText: {
+    fontSize: 25,
+    marginBottom: 5,
+    marginTop: 10,
+    width: '100%',
+  },
+  flatList: {
+    width: '100%',
+  }
+});
