@@ -1,14 +1,5 @@
 import useNasaApi from "./nasaApi";
 
-//display: biggest, closest, how many hazardous, brightest (magnitude)
-//take data from http request 
-//Biggest/closest/bightest: 
-    //find index of asteroid with biggest diameter
-    //map over array of asteroids - save index in variable, replace if bigger
-    //display {name} is the biggest asteroid with a diameter of {diameter} feet
-//How many hazardous:
-    //map over data
-    // count++ 
 export default function useDetailsInfo(selectedDate) {
     const { data } = useNasaApi(selectedDate);
       
@@ -25,7 +16,8 @@ export default function useDetailsInfo(selectedDate) {
             }
         }
 
-        return { index, diameter };
+        const biggest = data[index].name;
+        return { biggest, diameter };
     };
       
     const findClosest = (data) => {
@@ -40,7 +32,8 @@ export default function useDetailsInfo(selectedDate) {
             }
         }
 
-        return { index, distance };
+        const closest = data[index].name;
+        return { closest, distance };
     };
 
     const findBrightest = (data) => {
@@ -55,8 +48,9 @@ export default function useDetailsInfo(selectedDate) {
                 index = i;
             }
         }
-
-        return { index, magnitude };
+        
+        const brightest = data[index].name;
+        return { brightest, magnitude };
     };
 
     const findHazardous = (data) => {
@@ -70,7 +64,10 @@ export default function useDetailsInfo(selectedDate) {
 
         return { count };
     };
-
+console.log(findBiggest(data),
+findClosest(data),
+findBrightest(data),
+findHazardous(data))
 return { biggest: findBiggest(data),
         closest: findClosest(data),
         brightest: findBrightest(data),
