@@ -3,6 +3,7 @@ import { Text, View, ActivityIndicator, FlatList, TouchableOpacity, Image, Style
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import AsteroidDisplay from "./components/AsteroidListCard";
+import NoDataDisplay from "./components/NoDataDisplay";
 import useNasaApi from "./api/nasaApi";
 
 export default function Index() {
@@ -69,7 +70,7 @@ export default function Index() {
         data={data}
         renderItem={renderItem}
         keyExtractor={item=> item.id}
-        ListEmptyComponent={<Text>No data for that day</Text>}
+        ListEmptyComponent={<NoDataDisplay/>}
         style={styles.flatList}
       />
       </>

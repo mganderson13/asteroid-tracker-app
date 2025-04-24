@@ -1,5 +1,5 @@
 import React from "react";
-import { Text, View, StyleSheet } from "react-native";
+import { Text, View, Image, StyleSheet } from "react-native";
 
  
 const AsteroidDisplay = ({item}) => (
@@ -9,9 +9,11 @@ const AsteroidDisplay = ({item}) => (
     <Text style={styles.asteroidText}>Diameter: {item.estimated_diameter.feet.estimated_diameter_max.toFixed(3)} feet</Text>
     <Text style={styles.asteroidText}>Velocity: {item.close_approach_data[0].relative_velocity.miles_per_hour.slice(0, 9)} mph</Text>
     <Text style={styles.asteroidText}>Miss distance: {item.close_approach_data[0].miss_distance.miles.slice(0, 12)} miles</Text>
-    <Text style={styles.asteroidText}>{item.is_potentially_hazardous_asteroid ? 
-    "This asteroid is potentially hazardous!" 
-    : "This asteroid is not hazardous"}</Text>
+    {item.is_potentially_hazardous_asteroid ? 
+    <Text style={styles.asteroidText}>Potentially Hazardous! 😨</Text>
+    : <View style={styles.notHazardousContainer}><Text style={styles.asteroidText}>Not Hazardous</Text>
+    <Image source={require('../../assets/images/blueCheckImage.png')} resizeMode="contain" style={styles.notHazardousImage}/>
+    </View>}
     </View>
     </>
   );
@@ -28,6 +30,15 @@ const AsteroidDisplay = ({item}) => (
     },
     asteroidText: {
         fontSize: 21,
+    },
+    notHazardousContainer: {
+        flex: 1,
+        flexDirection: 'row',
+    }, 
+    notHazardousImage: {
+        width: 20,
+        height: 20,
+        marginLeft: 3,
     }
   })
 
