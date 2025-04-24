@@ -9,7 +9,7 @@ Near Earth Objects are comets and asteroids that have come within a certain dist
 
 This app was built using React Native and is run using Expo Go. Expo Go makes running and working on React Native apps possible without having Xcode for iOS or Android Studio.
 React Native was a new skill for Marianne, but with a strong basis in React and a love for learning it was a fun process learning React Native! It was educational researching what components are available, learning the importance of props, and discovering the frustrating apsects of React Native (cough environment variables cough).
-The UI was designed using the React Native style props and StyleSheets and the asteroid icons were designed by Marianne in a Google Doc! <img src="./assets/images/happyAsteroidIcon.png" width="10" height="10">
+The UI was designed using the React Native style props and StyleSheets and the asteroid icons were designed by Marianne in a Google Doc! <img src="./assets/images/happyAsteroidIcon.png" width="20" height="20">
 
 ## Get started
 
