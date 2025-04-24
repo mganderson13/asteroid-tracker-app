@@ -1,11 +1,14 @@
 import {useEffect, useState} from 'react';
+import Constants from 'expo-constants';
+
+
 
 export default function useNasaApi(dateToFetch) {
     const [isLoading, setIsLoading] = useState(true);
     const [data, setData] = useState([]);
     const [count, setCount] = useState(0);
 
-    const keyName ="lTHPxbpwqnn3thI5aiCieLtOpT1MZ85pxbkRI9tN";
+    const keyName = Constants.expoConfig.extra.API_KEY;;
 
     const getAsteroidData = async () => {
         try {
