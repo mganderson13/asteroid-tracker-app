@@ -4,7 +4,7 @@ import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import AsteroidDisplay from "./components/AsteroidListCard";
 import NoDataDisplay from "./components/NoDataDisplay";
-import useNasaApi from "./api/nasaApi";
+import useNasaApi from "./hooks/nasaApi";
 
 export default function Index() {
   let currentDate = new Date().toJSON().slice(0, 10);

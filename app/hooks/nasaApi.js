@@ -1,11 +1,9 @@
 import {useEffect, useState} from 'react';
 import Constants from 'expo-constants';
 
-
-
 export default function useNasaApi(dateToFetch) {
-    const [isLoading, setIsLoading] = useState(true);
     const [data, setData] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
     const [count, setCount] = useState(0);
 
     const keyName = Constants.expoConfig.extra.API_KEY;;
@@ -19,7 +17,7 @@ export default function useNasaApi(dateToFetch) {
         setData(json.near_earth_objects[dateToFetch]);
         setCount(json.element_count);
         } catch (error) {
-        console.error(error);
+        console.log(error);
         }finally {
         setIsLoading(false);
         }
