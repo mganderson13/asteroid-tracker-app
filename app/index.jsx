@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Text, View, ActivityIndicator, FlatList, TouchableOpacity, StyleSheet } from "react-native";
+import { Text, View, ActivityIndicator, FlatList, TouchableOpacity, Image, StyleSheet } from "react-native";
 import {SafeAreaView, SafeAreaProvider} from 'react-native-safe-area-context';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import AsteroidDisplay from "./components/AsteroidListCard";
@@ -38,7 +38,7 @@ export default function Index() {
     <SafeAreaView style={styles.container}>
     <View style={styles.container}>
       <Text style={styles.titleText}>Near Earth Object Tracker aka "The Asteroid App"</Text>
-      {/* <Text style={styles.titleText}>AKA The Asteroid App</Text> */}
+      <Image source={require('../assets/images/asteroidIcon.png')} resizeMode="contain" style={{ width: 160, height: 160 }}/>
       <TouchableOpacity onPress={toggleDatePicker} style={styles.button}>
       <Text style={styles.buttonText}>Pick a date</Text>
       </TouchableOpacity> 
