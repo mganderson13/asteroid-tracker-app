@@ -11,7 +11,7 @@ export default function Index() {
   const [tempDate, setTempDate] = useState(new Date())
   const [showDatePicker, setShowDatePicker] = useState(false);
 
-  const { data, isLoading } = useNasaApi(selectedDate);
+  const { data, isLoading, count } = useNasaApi(selectedDate);
 
   const toggleDatePicker = () => {
     setShowDatePicker(!showDatePicker);
@@ -64,7 +64,7 @@ export default function Index() {
       <ActivityIndicator />
     ) : (
       <>
-      <Text style={styles.headerText}>Nearby asteroids on {selectedDate}:</Text>
+      <Text style={styles.headerText}>{count} Nearby Asteroids on {selectedDate}:</Text>
       <FlatList 
         data={data}
         renderItem={renderItem}

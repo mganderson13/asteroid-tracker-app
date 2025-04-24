@@ -3,6 +3,7 @@ import {useEffect, useState} from 'react';
 export default function useNasaApi(dateToFetch) {
     const [isLoading, setIsLoading] = useState(true);
     const [data, setData] = useState([]);
+    const [count, setCount] = useState(0);
 
     const keyName ="lTHPxbpwqnn3thI5aiCieLtOpT1MZ85pxbkRI9tN";
 
@@ -13,6 +14,7 @@ export default function useNasaApi(dateToFetch) {
         );
         const json = await response.json();
         setData(json.near_earth_objects[dateToFetch]);
+        setCount(json.element_count);
         } catch (error) {
         console.error(error);
         }finally {
@@ -27,5 +29,5 @@ export default function useNasaApi(dateToFetch) {
         }
       }, [dateToFetch]);
 
-    return { data, isLoading };
+    return { data, isLoading, count };
 }
