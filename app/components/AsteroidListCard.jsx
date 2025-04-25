@@ -25,7 +25,7 @@ const AsteroidDisplay = ({item}) => (
         borderColor: 'rgb(86,135,159)',
         backgroundColor: 'white',
         padding: 5,
-        marginBottom: 5,
+        marginTop: 5,
         width: '100%',
     },
     asteroidText: {

@@ -1,8 +1,4 @@
-// import useNasaApi from "./nasaApi";
-
 export default function useDetailsInfo(data) {
-    // console.log("selectedDate", selectedDate);
-    // const { data } = useNasaApi(selectedDate);
 
     const findBiggest = (data) => {
         let diameter = 0;
