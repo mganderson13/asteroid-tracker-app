@@ -6,7 +6,8 @@ export default function useNasaApi(dateToFetch) {
     const [isLoading, setIsLoading] = useState(true);
     const [count, setCount] = useState(0);
 
-    const keyName = Constants.expoConfig.extra.API_KEY;;
+    const keyName = Constants.expoConfig.extra.API_KEY || "DEMO_KEY";
+
 
     const getAsteroidData = async () => {
         try {
