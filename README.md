@@ -18,7 +18,8 @@ To run this app locally on your machine:
 1. In your terminal run $ git clone https://github.com/mganderson13/asteroid-tracker-app.git
 2. Navigate to the project directory with the command $ cd asteroid-tracker-app
 3. Next, install the project's dependencies by running $ npm install
-4. To open this project in Expo Go run the command $ npx expo start
-5. Scan the QR code with the camera of your iOS phone or inside the Expo app on an Android
+4. Before you run the app, in the root directory of the project add at .env file with NASA_API_KEY=<api_key> replacing <api_key> with the provided Nasa NEO api key
+5. To open this project in Expo Go run the command $ npx expo start
+6. Scan the QR code with the camera of your iOS phone or inside the Expo app on an Android
 
 Happy Asteroid Tracking!
